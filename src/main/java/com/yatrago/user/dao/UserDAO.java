@@ -37,6 +37,18 @@ public class UserDAO {
         }
     }
 
+    public int getCount() {
+        String sql = "SELECT COUNT(*) FROM users";
+        try (Connection con = DbConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return rs.getInt(1);
+        } catch (Exception e) {
+            System.out.println("Error getting user count: " + e.getMessage());
+        }
+        return 0;
+    }
+
     public UserModel getUserByEmail(String email) {
         String sql = "SELECT id, name, email, password, role, created_at FROM users WHERE email = ?";
         try (Connection con = DbConnection.getConnection();
