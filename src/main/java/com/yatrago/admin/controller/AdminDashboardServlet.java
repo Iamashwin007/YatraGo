@@ -2,6 +2,7 @@ package com.yatrago.admin.controller;
 
 import com.yatrago.bus.dao.BusDAO;
 import com.yatrago.route.dao.RouteDAO;
+import com.yatrago.schedule.dao.ScheduleDAO;
 import com.yatrago.user.dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,10 +20,12 @@ public class AdminDashboardServlet extends HttpServlet {
             throws ServletException, IOException {
         BusDAO busDAO = new BusDAO();
         RouteDAO routeDAO = new RouteDAO();
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
         UserDAO userDAO = new UserDAO();
-        req.setAttribute("busCount", busDAO.getCount());
-        req.setAttribute("routeCount", routeDAO.getCount());
-        req.setAttribute("userCount", userDAO.getCount());
+        req.setAttribute("busCount",      busDAO.getCount());
+        req.setAttribute("routeCount",    routeDAO.getCount());
+        req.setAttribute("scheduleCount", scheduleDAO.getCount());
+        req.setAttribute("userCount",     userDAO.getCount());
         req.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(req, resp);
     }
 }

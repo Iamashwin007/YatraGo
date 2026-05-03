@@ -19,7 +19,7 @@
             <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link active">Dashboard</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/bus-list" class="nav-link">Buses</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/route-list" class="nav-link">Routes</a></li>
-            <li><a href="#" class="nav-link nav-link-placeholder">Schedules</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/schedule-list" class="nav-link">Schedules</a></li>
             <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
         </ul>
     </div>
@@ -48,6 +48,13 @@
                 <div>
                     <div class="stat-value">${routeCount}</div>
                     <div class="stat-label">Total Routes</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-purple">&#128197;</div>
+                <div>
+                    <div class="stat-value">${scheduleCount}</div>
+                    <div class="stat-label">Total Schedules</div>
                 </div>
             </div>
             <div class="stat-card">

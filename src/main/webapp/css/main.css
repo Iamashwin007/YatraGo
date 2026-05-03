@@ -749,3 +749,13 @@ button, input, select, textarea { font: inherit; }
     .stat-grid  { grid-template-columns: 1fr; }
     .form-card  { padding: 1.5rem 1.25rem; }
 }
+
+/* ============================================================
+   15. Schedule Status Badges + Stat Icon
+   ============================================================ */
+.badge-scheduled { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.badge-running   { background: var(--clr-success-bg); color: var(--clr-success); border-color: var(--clr-success-border); }
+.badge-completed { background: #f1f5f9; color: var(--clr-text-muted); border-color: var(--clr-border); }
+.badge-cancelled { background: var(--clr-error-bg); color: var(--clr-error); border-color: var(--clr-error-border); }
+
+.stat-icon-purple { background: #f5f3ff; }
