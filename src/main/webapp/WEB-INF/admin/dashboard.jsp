@@ -18,7 +18,7 @@
         <ul class="navbar-nav">
             <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link active">Dashboard</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/bus-list" class="nav-link">Buses</a></li>
-            <li><a href="#" class="nav-link nav-link-placeholder">Routes</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/route-list" class="nav-link">Routes</a></li>
             <li><a href="#" class="nav-link nav-link-placeholder">Schedules</a></li>
             <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
         </ul>
@@ -44,6 +44,13 @@
                 </div>
             </div>
             <div class="stat-card">
+                <div class="stat-icon stat-icon-orange">&#128506;</div>
+                <div>
+                    <div class="stat-value">${routeCount}</div>
+                    <div class="stat-label">Total Routes</div>
+                </div>
+            </div>
+            <div class="stat-card">
                 <div class="stat-icon stat-icon-green">&#128100;</div>
                 <div>
                     <div class="stat-value">${userCount}</div>
@@ -56,9 +63,10 @@
             <p class="quick-actions-title">Quick Actions</p>
             <div class="quick-actions-row">
                 <a href="${pageContext.request.contextPath}/admin/add-bus"  class="btn btn-primary">Add Bus</a>
-                <a href="${pageContext.request.contextPath}/admin/bus-list" class="btn btn-secondary">View Buses</a>
+                <a href="${pageContext.request.contextPath}/admin/bus-list"   class="btn btn-secondary">View Buses</a>
+                <a href="${pageContext.request.contextPath}/admin/add-route"  class="btn btn-primary">Add Route</a>
+                <a href="${pageContext.request.contextPath}/admin/route-list" class="btn btn-secondary">View Routes</a>
                 <span class="btn btn-secondary nav-link-placeholder">Manage Users</span>
-                <span class="btn btn-secondary nav-link-placeholder">Routes</span>
             </div>
         </div>
 

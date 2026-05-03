@@ -18,7 +18,7 @@
         <ul class="navbar-nav">
             <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Dashboard</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/bus-list" class="nav-link active">Buses</a></li>
-            <li><a href="#" class="nav-link nav-link-placeholder">Routes</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/route-list" class="nav-link">Routes</a></li>
             <li><a href="#" class="nav-link nav-link-placeholder">Schedules</a></li>
             <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
         </ul>
