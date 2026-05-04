@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Route Management — YatraGo Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 </head>
 <body>
@@ -15,7 +18,8 @@
         <a href="${pageContext.request.contextPath}/" class="navbar-brand">
             Yatra<span>Go</span><span class="admin-panel-badge">Admin</span>
         </a>
-        <ul class="navbar-nav">
+        <button class="hamburger" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+        <ul class="navbar-nav" id="mainNav">
             <li><a href="${pageContext.request.contextPath}/admin/dashboard"  class="nav-link">Dashboard</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/bus-list"   class="nav-link">Buses</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/route-list" class="nav-link active">Routes</a></li>
@@ -42,7 +46,7 @@
                     <div class="empty-state">
                         <div class="empty-state-icon">&#128506;</div>
                         <p class="empty-state-title">No routes added yet</p>
-                        <p>Click "Add New Route" to get started.</p>
+                        <p>Click &ldquo;Add New Route&rdquo; to get started.</p>
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -95,9 +99,27 @@
 </main>
 
 <footer class="footer">
-    <span class="footer-brand">Yatra<span style="color:#e85d04;">Go</span></span>
+    <span class="footer-brand">Yatra<span>Go</span></span>
     &copy; 2026 YatraGo. Admin Panel.
 </footer>
+
+<script>
+(function () {
+    var nav    = document.querySelector('.navbar');
+    var toggle = document.getElementById('navToggle');
+    var menu   = document.getElementById('mainNav');
+    if (nav) {
+        window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 8);
+        }, { passive: true });
+    }
+    if (toggle && menu) {
+        toggle.addEventListener('click', function () {
+            menu.classList.toggle('nav-open');
+        });
+    }
+}());
+</script>
 
 </body>
 </html>

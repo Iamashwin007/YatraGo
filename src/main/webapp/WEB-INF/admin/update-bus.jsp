@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Bus — YatraGo Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 </head>
 <body>
@@ -15,7 +18,8 @@
         <a href="${pageContext.request.contextPath}/" class="navbar-brand">
             Yatra<span>Go</span><span class="admin-panel-badge">Admin</span>
         </a>
-        <ul class="navbar-nav">
+        <button class="hamburger" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+        <ul class="navbar-nav" id="mainNav">
             <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Dashboard</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/bus-list" class="nav-link active">Buses</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/route-list" class="nav-link">Routes</a></li>
@@ -63,11 +67,11 @@
                     <div class="form-group">
                         <label class="form-label" for="busType">Bus Type *</label>
                         <select id="busType" name="busType" class="form-input" required>
-                            <option value="AC Deluxe"   <c:if test="${bus.busType == 'AC Deluxe'}">selected</c:if>>AC Deluxe</option>
-                            <option value="AC Sleeper"  <c:if test="${bus.busType == 'AC Sleeper'}">selected</c:if>>AC Sleeper</option>
-                            <option value="Non-AC"      <c:if test="${bus.busType == 'Non-AC'}">selected</c:if>>Non-AC</option>
-                            <option value="Tourist"     <c:if test="${bus.busType == 'Tourist'}">selected</c:if>>Tourist</option>
-                            <option value="Micro"       <c:if test="${bus.busType == 'Micro'}">selected</c:if>>Micro</option>
+                            <option value="AC Deluxe"  <c:if test="${bus.busType == 'AC Deluxe'}">selected</c:if>>AC Deluxe</option>
+                            <option value="AC Sleeper" <c:if test="${bus.busType == 'AC Sleeper'}">selected</c:if>>AC Sleeper</option>
+                            <option value="Non-AC"     <c:if test="${bus.busType == 'Non-AC'}">selected</c:if>>Non-AC</option>
+                            <option value="Tourist"    <c:if test="${bus.busType == 'Tourist'}">selected</c:if>>Tourist</option>
+                            <option value="Micro"      <c:if test="${bus.busType == 'Micro'}">selected</c:if>>Micro</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -87,9 +91,9 @@
                 <div class="form-group">
                     <label class="form-label" for="status">Status *</label>
                     <select id="status" name="status" class="form-input" required>
-                        <option value="active"       <c:if test="${bus.status == 'active'}">selected</c:if>>Active</option>
-                        <option value="maintenance"  <c:if test="${bus.status == 'maintenance'}">selected</c:if>>Maintenance</option>
-                        <option value="inactive"     <c:if test="${bus.status == 'inactive'}">selected</c:if>>Inactive</option>
+                        <option value="active"      <c:if test="${bus.status == 'active'}">selected</c:if>>Active</option>
+                        <option value="maintenance" <c:if test="${bus.status == 'maintenance'}">selected</c:if>>Maintenance</option>
+                        <option value="inactive"    <c:if test="${bus.status == 'inactive'}">selected</c:if>>Inactive</option>
                     </select>
                 </div>
 
@@ -105,17 +109,30 @@
 </main>
 
 <footer class="footer">
-    <span class="footer-brand">Yatra<span style="color:#e85d04;">Go</span></span>
+    <span class="footer-brand">Yatra<span>Go</span></span>
     &copy; 2026 YatraGo. Admin Panel.
 </footer>
 
 <script>
+(function () {
+    var nav    = document.querySelector('.navbar');
+    var toggle = document.getElementById('navToggle');
+    var menu   = document.getElementById('mainNav');
+    if (nav) {
+        window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 8);
+        }, { passive: true });
+    }
+    if (toggle && menu) {
+        toggle.addEventListener('click', function () {
+            menu.classList.toggle('nav-open');
+        });
+    }
     document.getElementById('updateBusForm').addEventListener('submit', function (e) {
-        var busNumber   = document.getElementById('busNumber').value.trim();
-        var operator    = document.getElementById('operatorName').value.trim();
-        var busType     = document.getElementById('busType').value;
-        var seats       = document.getElementById('totalSeats').value.trim();
-
+        var busNumber = document.getElementById('busNumber').value.trim();
+        var operator  = document.getElementById('operatorName').value.trim();
+        var busType   = document.getElementById('busType').value;
+        var seats     = document.getElementById('totalSeats').value.trim();
         if (!busNumber || !operator || !busType || !seats) {
             e.preventDefault();
             alert('Please fill in all required fields.');
@@ -126,6 +143,7 @@
             alert('Total seats must be at least 1.');
         }
     });
+}());
 </script>
 
 </body>
