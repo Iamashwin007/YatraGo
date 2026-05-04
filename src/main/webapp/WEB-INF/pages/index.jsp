@@ -49,7 +49,7 @@
             </h1>
             <p class="hero-subtitle">
                 Search routes, pick your seat, and get your e-ticket in minutes.
-                No queues, no guesswork — just travel.
+                No queues, no guesswork. Just travel.
             </p>
             <div class="hero-actions">
                 <c:choose>
@@ -96,7 +96,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Everything you need to travel smarter</h2>
-                <p class="section-subtitle">From Kathmandu to Pokhara and beyond — YatraGo has you covered.</p>
+                <p class="section-subtitle">From Kathmandu to Pokhara and beyond. YatraGo has you covered.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
@@ -177,6 +177,14 @@
     }
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@ import com.yatrago.bus.dao.BusDAO;
 import com.yatrago.route.dao.RouteDAO;
 import com.yatrago.schedule.dao.ScheduleDAO;
 import com.yatrago.schedule.model.ScheduleModel;
+import com.yatrago.utils.FlashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -95,6 +96,7 @@ public class AddScheduleServlet extends HttpServlet {
 
         ScheduleDAO scheduleDAO = new ScheduleDAO();
         if (scheduleDAO.addSchedule(s)) {
+            FlashUtil.setMessage(req, "success", "Schedule added successfully.");
             resp.sendRedirect(req.getContextPath() + "/admin/schedule-list");
         } else {
             req.setAttribute("error", "Failed to add schedule. Please try again.");

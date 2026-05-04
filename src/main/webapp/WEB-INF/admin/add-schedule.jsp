@@ -52,17 +52,17 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label" for="busId">Bus *</label>
-                        <select id="busId" name="busId" class="form-input" required>
-                            <option value="">-- Select Bus --</option>
+                        <select id="busId" name="busId" class="form-input" required autofocus>
+                            <option value="">Select Bus</option>
                             <c:forEach var="bus" items="${buses}">
-                                <option value="${bus.id}">${bus.busNumber} — ${bus.operatorName}</option>
+                                <option value="${bus.id}">${bus.busNumber} &middot; ${bus.operatorName}</option>
                             </c:forEach>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="routeId">Route *</label>
                         <select id="routeId" name="routeId" class="form-input" required>
-                            <option value="">-- Select Route --</option>
+                            <option value="">Select Route</option>
                             <c:forEach var="route" items="${routes}">
                                 <option value="${route.id}">${route.origin} &rarr; ${route.destination}</option>
                             </c:forEach>
@@ -156,6 +156,14 @@
     });
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>

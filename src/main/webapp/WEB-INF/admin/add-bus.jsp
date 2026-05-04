@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label class="form-label" for="busNumber">Bus Number *</label>
                         <input type="text" id="busNumber" name="busNumber" class="form-input"
-                               placeholder="e.g. BA-1-KHA-1234" required>
+                               placeholder="e.g. BA-1-KHA-1234" required autofocus>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="operatorName">Operator Name *</label>
@@ -66,7 +66,7 @@
                     <div class="form-group">
                         <label class="form-label" for="busType">Bus Type *</label>
                         <select id="busType" name="busType" class="form-input" required>
-                            <option value="">-- Select Type --</option>
+                            <option value="">Select Type</option>
                             <option value="AC Deluxe">AC Deluxe</option>
                             <option value="AC Sleeper">AC Sleeper</option>
                             <option value="Non-AC">Non-AC</option>
@@ -85,7 +85,7 @@
                     <label class="form-label" for="amenities">Amenities</label>
                     <input type="text" id="amenities" name="amenities" class="form-input"
                            placeholder="e.g. WiFi, USB charging, Snacks">
-                    <span class="form-hint">Optional — comma-separated list</span>
+                    <span class="form-hint">Optional. Comma-separated list.</span>
                 </div>
 
                 <div class="form-group">
@@ -145,6 +145,14 @@
     });
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.yatrago.bus.controller;
 
 import com.yatrago.bus.dao.BusDAO;
 import com.yatrago.bus.model.BusModel;
+import com.yatrago.utils.FlashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -61,6 +62,7 @@ public class AddBusServlet extends HttpServlet {
         bus.setStatus(status.isEmpty() ? "active" : status);
 
         if (busDAO.addBus(bus)) {
+            FlashUtil.setMessage(req, "success", "Bus added successfully.");
             resp.sendRedirect(req.getContextPath() + "/admin/bus-list");
         } else {
             req.setAttribute("error", "Failed to add bus. Please try again.");

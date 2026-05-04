@@ -2,6 +2,7 @@ package com.yatrago.route.controller;
 
 import com.yatrago.route.dao.RouteDAO;
 import com.yatrago.route.model.RouteModel;
+import com.yatrago.utils.FlashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -67,6 +68,7 @@ public class AddRouteServlet extends HttpServlet {
         route.setStatus(status.isEmpty() ? "active" : status);
 
         if (routeDAO.addRoute(route)) {
+            FlashUtil.setMessage(req, "success", "Route added successfully.");
             resp.sendRedirect(req.getContextPath() + "/admin/route-list");
         } else {
             req.setAttribute("error", "Failed to add route. Please try again.");

@@ -2,6 +2,7 @@ package com.yatrago.bus.controller;
 
 import com.yatrago.bus.dao.BusDAO;
 import com.yatrago.bus.model.BusModel;
+import com.yatrago.utils.FlashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -91,6 +92,7 @@ public class UpdateBusServlet extends HttpServlet {
 
         BusDAO busDAO = new BusDAO();
         if (busDAO.updateBus(bus)) {
+            FlashUtil.setMessage(req, "success", "Bus updated.");
             resp.sendRedirect(req.getContextPath() + "/admin/bus-list");
         } else {
             req.setAttribute("error", "Failed to update bus. Please try again.");

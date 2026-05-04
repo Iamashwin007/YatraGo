@@ -85,7 +85,7 @@
                     <label class="form-label" for="amenities">Amenities</label>
                     <input type="text" id="amenities" name="amenities" class="form-input"
                            value="${bus.amenities}">
-                    <span class="form-hint">Optional — comma-separated list</span>
+                    <span class="form-hint">Optional. Comma-separated list.</span>
                 </div>
 
                 <div class="form-group">
@@ -145,6 +145,14 @@
     });
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.yatrago.bus.controller;
 
 import com.yatrago.bus.dao.BusDAO;
+import com.yatrago.utils.FlashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class DeleteBusServlet extends HttpServlet {
                 System.out.println("Invalid bus id for delete: " + e.getMessage());
             }
         }
+        FlashUtil.setMessage(req, "success", "Bus deleted.");
         resp.sendRedirect(req.getContextPath() + "/admin/bus-list");
     }
 }

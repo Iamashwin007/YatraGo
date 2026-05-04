@@ -107,5 +107,13 @@
 }());
 </script>
 
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
+
 </body>
 </html>

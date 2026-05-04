@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label class="form-label" for="origin">Origin *</label>
                         <input type="text" id="origin" name="origin" class="form-input"
-                               placeholder="e.g. Kathmandu" required>
+                               placeholder="e.g. Kathmandu" required autofocus>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="destination">Destination *</label>
@@ -139,6 +139,14 @@
     });
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>

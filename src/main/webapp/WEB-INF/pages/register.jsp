@@ -34,94 +34,104 @@
     </div>
 </nav>
 
-<main class="auth-page">
-    <div class="auth-card">
-        <a href="${pageContext.request.contextPath}/" class="auth-logo">Yatra<span>Go</span></a>
-        <h1 class="auth-title">Create an account</h1>
-        <p class="auth-subtitle">Join YatraGo and book smarter</p>
+<main class="auth-split">
+    <div class="auth-panel-left">
+        <div class="auth-panel-content">
+            <a href="${pageContext.request.contextPath}/" class="auth-panel-logo">Yatra<span>Go</span></a>
+            <h2 class="auth-panel-heading">Join YatraGo</h2>
+            <p class="auth-panel-sub">Book your next Nepal bus journey in minutes.</p>
+            <div class="auth-panel-illus">&#127915;</div>
+        </div>
+    </div>
+    <div class="auth-panel-right">
+        <div class="auth-panel-content">
+            <h1 class="auth-title">Create an account</h1>
+            <p class="auth-subtitle">Join YatraGo and book smarter</p>
 
-        <c:if test="${not empty error}">
-            <div class="alert alert-error">
-                <span class="alert-icon">&#9888;</span>
-                <span>${error}</span>
-            </div>
-        </c:if>
+            <c:if test="${not empty error}">
+                <div class="alert alert-error">
+                    <span class="alert-icon">&#9888;</span>
+                    <span>${error}</span>
+                </div>
+            </c:if>
 
-        <form action="${pageContext.request.contextPath}/register" method="post" id="registerForm" novalidate>
-            <div class="form-group">
-                <label class="form-label" for="name">Full name</label>
-                <input
-                    class="form-input"
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Ashwin Pokhrel"
-                    required
-                    autocomplete="name"
-                >
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="email">Email address</label>
-                <input
-                    class="form-input"
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    required
-                    autocomplete="email"
-                >
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="phone">Phone number</label>
-                <input
-                    class="form-input"
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="9800000000"
-                    pattern="^9[0-9]{9}$"
-                    title="Enter a valid Nepal phone number (10 digits starting with 9)"
-                    required
-                    autocomplete="tel"
-                >
-                <span class="form-hint">Nepal format: 10 digits starting with 9</span>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="password">Password</label>
-                <input
-                    class="form-input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Min 8 chars, letters &amp; numbers"
-                    required
-                    minlength="8"
-                    autocomplete="new-password"
-                >
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="confirmPassword">Confirm password</label>
-                <input
-                    class="form-input"
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="Repeat your password"
-                    required
-                    autocomplete="new-password"
-                >
-                <span id="pwMismatch" class="form-hint" style="color:var(--clr-error);display:none;">
-                    Passwords do not match.
-                </span>
-            </div>
+            <form action="${pageContext.request.contextPath}/register" method="post" id="registerForm" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="name">Full name</label>
+                    <input
+                        class="form-input"
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Ashwin Pokhrel"
+                        required
+                        autocomplete="name"
+                        autofocus
+                    >
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email address</label>
+                    <input
+                        class="form-input"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone number</label>
+                    <input
+                        class="form-input"
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="9800000000"
+                        pattern="^9[0-9]{9}$"
+                        title="Enter a valid Nepal phone number (10 digits starting with 9)"
+                        required
+                        autocomplete="tel"
+                    >
+                    <span class="form-hint">Nepal format: 10 digits starting with 9</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input
+                        class="form-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Min 8 chars, letters &amp; numbers"
+                        required
+                        minlength="8"
+                        autocomplete="new-password"
+                    >
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirm password</label>
+                    <input
+                        class="form-input"
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Repeat your password"
+                        required
+                        autocomplete="new-password"
+                    >
+                    <span id="pwMismatch" class="form-hint" style="color:var(--clr-error);display:none;">
+                        Passwords do not match.
+                    </span>
+                </div>
 
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account</button>
-        </form>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account</button>
+            </form>
 
-        <p class="auth-footer">
-            Already have an account? <a href="${pageContext.request.contextPath}/login">Sign in</a>
-        </p>
+            <p class="auth-footer">
+                Already have an account? <a href="${pageContext.request.contextPath}/login">Sign in</a>
+            </p>
+        </div>
     </div>
 </main>
 
@@ -159,6 +169,14 @@
     });
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>

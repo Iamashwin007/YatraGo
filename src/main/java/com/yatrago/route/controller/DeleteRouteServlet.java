@@ -1,6 +1,7 @@
 package com.yatrago.route.controller;
 
 import com.yatrago.route.dao.RouteDAO;
+import com.yatrago.utils.FlashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class DeleteRouteServlet extends HttpServlet {
                 System.out.println("Invalid route id for delete: " + e.getMessage());
             }
         }
+        FlashUtil.setMessage(req, "success", "Route deleted.");
         resp.sendRedirect(req.getContextPath() + "/admin/route-list");
     }
 }

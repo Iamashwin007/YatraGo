@@ -3,6 +3,7 @@ package com.yatrago.user.controller;
 import com.yatrago.user.dao.UserDAO;
 import com.yatrago.user.model.UserModel;
 import com.yatrago.utils.CookieUtil;
+import com.yatrago.utils.FlashUtil;
 import com.yatrago.utils.PasswordUtil;
 import com.yatrago.utils.SessionUtil;
 import com.yatrago.utils.ValidationUtil;
@@ -48,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 
         SessionUtil.setUser(req, user);
         CookieUtil.setCookie(resp, "email", user.getEmail(), 30 * 24 * 60 * 60);
+        FlashUtil.setMessage(req, "success", "Welcome back, " + user.getName() + ".");
 
         if ("admin".equals(user.getRole())) {
             resp.sendRedirect(req.getContextPath() + "/admin/dashboard");

@@ -1,6 +1,7 @@
 package com.yatrago.user.controller;
 
 import com.yatrago.utils.CookieUtil;
+import com.yatrago.utils.FlashUtil;
 import com.yatrago.utils.SessionUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,6 +19,7 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         SessionUtil.logout(req);
         CookieUtil.deleteCookie(resp, "email");
+        FlashUtil.setMessage(req, "info", "You have been logged out.");
         resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

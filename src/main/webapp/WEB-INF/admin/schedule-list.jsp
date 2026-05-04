@@ -45,8 +45,8 @@
                 <c:when test="${empty schedules}">
                     <div class="empty-state">
                         <div class="empty-state-icon">&#128197;</div>
-                        <p class="empty-state-title">No schedules added yet</p>
-                        <p>Click &ldquo;Add New Schedule&rdquo; to get started.</p>
+                        <p class="empty-state-title">No schedules yet</p>
+                        <p>Click &ldquo;Add New Schedule&rdquo; above to get started.</p>
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -127,6 +127,14 @@
     }
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.yatrago.schedule.controller;
 
 import com.yatrago.schedule.dao.ScheduleDAO;
+import com.yatrago.utils.FlashUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class DeleteScheduleServlet extends HttpServlet {
                 System.out.println("Invalid schedule id for delete: " + e.getMessage());
             }
         }
+        FlashUtil.setMessage(req, "success", "Schedule deleted.");
         resp.sendRedirect(req.getContextPath() + "/admin/schedule-list");
     }
 }

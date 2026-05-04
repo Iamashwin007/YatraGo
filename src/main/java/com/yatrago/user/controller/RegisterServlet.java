@@ -2,6 +2,7 @@ package com.yatrago.user.controller;
 
 import com.yatrago.user.dao.UserDAO;
 import com.yatrago.user.model.UserModel;
+import com.yatrago.utils.FlashUtil;
 import com.yatrago.utils.PasswordUtil;
 import com.yatrago.utils.ValidationUtil;
 import jakarta.servlet.ServletException;
@@ -68,6 +69,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
+        FlashUtil.setMessage(req, "success", "Account created successfully. Please log in.");
         resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

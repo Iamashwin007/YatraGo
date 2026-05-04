@@ -34,52 +34,62 @@
     </div>
 </nav>
 
-<main class="auth-page">
-    <div class="auth-card">
-        <a href="${pageContext.request.contextPath}/" class="auth-logo">Yatra<span>Go</span></a>
-        <h1 class="auth-title">Welcome back</h1>
-        <p class="auth-subtitle">Sign in to your account to continue</p>
+<main class="auth-split">
+    <div class="auth-panel-left">
+        <div class="auth-panel-content">
+            <a href="${pageContext.request.contextPath}/" class="auth-panel-logo">Yatra<span>Go</span></a>
+            <h2 class="auth-panel-heading">Welcome back to YatraGo</h2>
+            <p class="auth-panel-sub">Nepal's smartest way to book your bus journey.</p>
+            <div class="auth-panel-illus">&#128652;</div>
+        </div>
+    </div>
+    <div class="auth-panel-right">
+        <div class="auth-panel-content">
+            <h1 class="auth-title">Sign in</h1>
+            <p class="auth-subtitle">Enter your details to continue</p>
 
-        <c:if test="${not empty error}">
-            <div class="alert alert-error">
-                <span class="alert-icon">&#9888;</span>
-                <span>${error}</span>
-            </div>
-        </c:if>
+            <c:if test="${not empty error}">
+                <div class="alert alert-error">
+                    <span class="alert-icon">&#9888;</span>
+                    <span>${error}</span>
+                </div>
+            </c:if>
 
-        <form action="${pageContext.request.contextPath}/login" method="post" novalidate>
-            <div class="form-group">
-                <label class="form-label" for="email">Email address</label>
-                <input
-                    class="form-input"
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    value="${not empty cookie.email ? cookie.email.value : ''}"
-                    required
-                    autocomplete="email"
-                >
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="password">Password</label>
-                <input
-                    class="form-input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                    autocomplete="current-password"
-                >
-            </div>
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
-        </form>
+            <form action="${pageContext.request.contextPath}/login" method="post" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email address</label>
+                    <input
+                        class="form-input"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        value="${not empty cookie.email ? cookie.email.value : ''}"
+                        required
+                        autocomplete="email"
+                        autofocus
+                    >
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input
+                        class="form-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+            </form>
 
-        <p class="auth-footer">
-            Don&apos;t have an account?
-            <a href="${pageContext.request.contextPath}/register">Create one</a>
-        </p>
+            <p class="auth-footer">
+                Don&apos;t have an account?
+                <a href="${pageContext.request.contextPath}/register">Create one</a>
+            </p>
+        </div>
     </div>
 </main>
 
@@ -105,6 +115,14 @@
     }
 }());
 </script>
+
+<c:if test="${not empty sessionScope.flashMessage}">
+    <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
+<div id="toast-container"></div>
+<script src="${pageContext.request.contextPath}/js/toasts.js"></script>
 
 </body>
 </html>
