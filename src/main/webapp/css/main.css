@@ -759,3 +759,33 @@ button, input, select, textarea { font: inherit; }
 .badge-cancelled { background: var(--clr-error-bg); color: var(--clr-error); border-color: var(--clr-error-border); }
 
 .stat-icon-purple { background: #f5f3ff; }
+
+/* ============================================================
+   Profile page
+   ============================================================ */
+.profile-info {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--clr-border-light);
+}
+.profile-row:last-child { border-bottom: none; }
+.profile-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    flex-shrink: 0;
+    margin-right: 1rem;
+}
+.profile-value {
+    font-size: 0.9375rem;
+    color: var(--clr-text);
+    text-align: right;
+}

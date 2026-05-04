@@ -14,7 +14,18 @@
     <div class="container">
         <a href="${pageContext.request.contextPath}/" class="navbar-brand">Yatra<span>Go</span></a>
         <ul class="navbar-nav">
-            <li><a href="${pageContext.request.contextPath}/register" class="nav-link nav-link-cta">Register</a></li>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <c:if test="${sessionScope.user.role == 'admin'}">
+                        <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
+                    </c:if>
+                    <li><a href="${pageContext.request.contextPath}/profile" class="nav-link">Profile</a></li>
+                    <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${pageContext.request.contextPath}/register" class="nav-link nav-link-cta">Register</a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 </nav>

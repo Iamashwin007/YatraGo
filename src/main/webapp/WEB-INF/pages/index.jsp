@@ -21,8 +21,9 @@
                 <c:when test="${not empty sessionScope.user}">
                     <li><span class="nav-greeting">Hi, ${sessionScope.user.name}</span></li>
                     <c:if test="${sessionScope.user.role == 'admin'}">
-                        <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Dashboard</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
                     </c:if>
+                    <li><a href="${pageContext.request.contextPath}/profile" class="nav-link">Profile</a></li>
                     <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
                 </c:when>
                 <c:otherwise>
@@ -47,8 +48,18 @@
                 No queues, no guesswork.
             </p>
             <div class="hero-actions">
-                <a href="${pageContext.request.contextPath}/register" class="btn btn-accent btn-lg">Get Started</a>
-                <a href="${pageContext.request.contextPath}/login"    class="btn btn-outline-white btn-lg">Sign In</a>
+                <c:choose>
+                    <c:when test="${sessionScope.user.role == 'admin'}">
+                        <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-accent btn-lg">Go to Admin Dashboard</a>
+                    </c:when>
+                    <c:when test="${not empty sessionScope.user}">
+                        <a href="${pageContext.request.contextPath}/profile" class="btn btn-accent btn-lg">My Profile</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/register" class="btn btn-accent btn-lg">Get Started</a>
+                        <a href="${pageContext.request.contextPath}/login"    class="btn btn-outline-white btn-lg">Sign In</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </section>
