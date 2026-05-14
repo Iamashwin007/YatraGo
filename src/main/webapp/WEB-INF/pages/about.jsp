@@ -6,44 +6,39 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About - Yatrago</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/main.css">
     <style>
         :root {
             --teal: #0D9488;
             --teal-dark: #134E4A;
-            --teal-soft: #CCFBF1;
             --coral: #F97360;
+            --bg: #F8FAFC;
             --white: #FFFFFF;
             --text: #1F2937;
-            --muted: #6B7280;
+            --muted: #64748B;
             --shadow: 0 4px 16px rgba(13,148,136,0.10);
             --radius: 12px;
             --transition: all 0.3s ease;
             --max-width: 1140px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
             color: var(--text);
-            background: #F8FAFC;
             line-height: 1.6;
         }
 
-        a {
-            text-decoration: none;
-            transition: var(--transition);
-        }
+        a { text-decoration: none; transition: var(--transition); }
 
         .container {
             width: 92%;
@@ -51,78 +46,102 @@
             margin: 0 auto;
         }
 
-        /* Navbar */
         .navbar {
-            background: var(--teal);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            background: var(--white);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
         }
 
-        .nav-inner {
+        .navbar.scrolled {
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .navbar .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 16px;
             padding: 14px 0;
             flex-wrap: wrap;
-            gap: 12px;
         }
 
-        .brand {
-            color: var(--white);
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 0.4px;
+        .navbar-brand {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--teal);
         }
 
-        .nav-links {
+        .navbar-brand span { color: var(--coral); }
+
+        .hamburger {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            color: var(--teal-dark);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .navbar-nav {
             list-style: none;
             display: flex;
+            align-items: center;
             gap: 10px;
             flex-wrap: wrap;
         }
 
-        .nav-links a {
-            color: var(--white);
-            padding: 8px 14px;
-            border-radius: 999px;
-            font-weight: 500;
+        .nav-link {
+            color: var(--teal-dark);
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 10px;
+            transition: var(--transition);
         }
 
-        .nav-links a:hover {
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--teal);
+            color: var(--white);
+        }
+
+        .nav-link-cta {
             background: var(--coral);
-        }
-
-        .nav-links a.active {
-            background: rgba(255,255,255,0.18);
-        }
-
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
             color: var(--white);
-            padding: 74px 0 68px;
+        }
+
+        .nav-link-cta:hover {
+            background: #fb6a55;
+            color: var(--white);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--teal) 0%, #0F766E 100%);
+            color: var(--white);
+            padding: 76px 0 70px;
             text-align: center;
         }
 
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .hero h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 12px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 14px;
             font-weight: 800;
-            letter-spacing: 0.4px;
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            max-width: 840px;
-            margin: 0 auto;
+            font-size: clamp(1rem, 2vw, 1.12rem);
             opacity: 0.96;
         }
 
-        section {
-            padding: 56px 0;
-        }
+        section { padding: 56px 0; }
 
         .section-title {
             font-size: 1.8rem;
@@ -130,17 +149,13 @@
             color: var(--teal-dark);
         }
 
-        /* Story */
         .story-grid {
             display: flex;
             gap: 24px;
             align-items: stretch;
         }
 
-        .story-text,
-        .story-card {
-            flex: 1;
-        }
+        .story-text, .story-card { flex: 1; }
 
         .story-text p {
             color: #334155;
@@ -148,7 +163,7 @@
         }
 
         .story-card {
-            background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+            background: linear-gradient(135deg, var(--teal) 0%, #14B8A6 100%);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             min-height: 240px;
@@ -162,14 +177,14 @@
             font-weight: 600;
         }
 
-        /* Mission / Vision */
-        .mv-grid {
+        .mv-grid, .values-grid, .team-grid {
             display: flex;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .mv-card {
-            flex: 1;
+        .mv-card, .value-card, .team-card {
+            flex: 1 1 calc(33.333% - 14px);
             background: var(--white);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
@@ -177,46 +192,27 @@
             transition: var(--transition);
         }
 
-        .mv-card:hover {
+        .mv-card:hover, .value-card:hover, .team-card:hover {
             transform: translateY(-4px);
         }
 
-        .mv-card h3 {
+        .mv-card h3, .value-card h4, .team-card h4 {
             margin-bottom: 10px;
             color: #0F172A;
         }
 
-        .mission {
-            border-left: 6px solid var(--teal);
-        }
+        .mission { border-left: 6px solid var(--teal); }
+        .vision { border-left: 6px solid var(--coral); }
 
-        .vision {
-            border-left: 6px solid var(--coral);
-        }
-
-        .mv-card p {
-            color: #475569;
-        }
-
-        /* Values */
-        .values-grid {
-            display: flex;
-            gap: 20px;
+        .mv-card p,
+        .value-card p,
+        .team-card p {
+            color: var(--muted);
         }
 
         .value-card {
-            flex: 1;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 24px 18px;
             text-align: center;
-            transition: var(--transition);
-        }
-
-        .value-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 24px rgba(249,115,96,0.18);
+            padding: 24px 18px;
         }
 
         .icon-circle {
@@ -238,34 +234,8 @@
             transform: scale(1.06);
         }
 
-        .value-card h4 {
-            margin-bottom: 6px;
-            color: var(--teal-dark);
-        }
-
-        .value-card p {
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        /* Team */
-        .team-grid {
-            display: flex;
-            gap: 20px;
-        }
-
         .team-card {
-            flex: 1;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 24px;
             text-align: center;
-            transition: var(--transition);
-        }
-
-        .team-card:hover {
-            transform: translateY(-4px);
         }
 
         .avatar {
@@ -278,94 +248,55 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.45rem;
-            font-weight: 700;
+            font-size: 1.35rem;
+            font-weight: 800;
             letter-spacing: 0.6px;
         }
 
-        .team-card h4 {
-            margin-bottom: 5px;
-            color: #0F172A;
-        }
-
-        .team-card p {
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--teal-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 20px 12px;
-            font-size: 0.95rem;
-            margin-top: 16px;
-        }
-
-        /* Responsive */
         @media (max-width: 992px) {
-            .story-grid,
-            .mv-grid,
-            .values-grid,
-            .team-grid {
-                flex-wrap: wrap;
-            }
-
-            .story-text,
-            .story-card,
-            .mv-card,
-            .value-card,
-            .team-card {
-                flex: 1 1 calc(50% - 12px);
-            }
+            .story-grid { flex-wrap: wrap; }
+            .story-text, .story-card { flex: 1 1 100%; }
+            .mv-card, .value-card, .team-card { flex: 1 1 calc(50% - 10px); }
         }
 
         @media (max-width: 640px) {
-            .nav-inner {
+            .navbar .container { justify-content: center; }
+            .hamburger { display: block; }
+            .navbar-nav {
+                display: none;
+                width: 100%;
                 justify-content: center;
             }
-
-            .brand {
+            .navbar-nav.nav-open { display: flex; }
+            .navbar-brand {
                 width: 100%;
                 text-align: center;
             }
-
-            .nav-links {
-                justify-content: center;
-            }
-
-            .story-text,
-            .story-card,
-            .mv-card,
-            .value-card,
-            .team-card {
-                flex: 1 1 100%;
-            }
-
-            section {
-                padding: 44px 0;
-            }
+            .mv-card, .value-card, .team-card { flex: 1 1 100%; }
+            section { padding: 44px 0; }
         }
     </style>
 </head>
 <body>
 
-<header class="navbar">
-    <div class="container nav-inner">
-        <a class="brand" href="<%= request.getContextPath() %>/">Yatrago</a>
-        <ul class="nav-links">
-            <li><a href="<%= request.getContextPath() %>/">Home</a></li>
-            <li><a class="active" href="<%= request.getContextPath() %>/pages/about">About</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/contact">Contact</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/login">Login</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/register">Register</a></li>
+<nav class="navbar">
+    <div class="container">
+        <a href="<%= request.getContextPath() %>/" class="navbar-brand">
+            Yatra<span>Go</span>
+        </a>
+        <button class="hamburger" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+        <ul class="navbar-nav" id="mainNav">
+            <li><a href="<%= request.getContextPath() %>/" class="nav-link">Home</a></li>
+            <li><a href="<%= request.getContextPath() %>/pages/about" class="nav-link active">About</a></li>
+            <li><a href="<%= request.getContextPath() %>/pages/contact" class="nav-link">Contact</a></li>
+            <li><a href="<%= request.getContextPath() %>/login" class="nav-link">Login</a></li>
+            <li><a href="<%= request.getContextPath() %>/register" class="nav-link nav-link-cta">Register</a></li>
         </ul>
     </div>
-</header>
+</nav>
 
 <section class="hero">
-    <div class="container">
+    <div class="hero-inner container">
         <h1>About Yatrago</h1>
         <p>Your trusted companion for safe, affordable, and comfortable bus travel across Nepal.</p>
     </div>
@@ -375,9 +306,9 @@
     <div class="container story-grid">
         <div class="story-text">
             <h2 class="section-title">Our Story</h2>
-            <p>Yatrago was founded with a simple goal: make bus travel in Nepal easier for everyone.</p>
-            <p>From busy city routes to long-distance journeys through the hills, we connect passengers with trusted operators and convenient schedules across the country.</p>
-            <p>By combining technology with local travel needs, Yatrago helps travelers discover routes, plan confidently, and ride with peace of mind.</p>
+            <p>Yatrago was founded to simplify bus travel in Nepal and make journey planning easier for everyone.</p>
+            <p>We connect passengers to routes across the country with a simple, reliable booking experience built around convenience and trust.</p>
+            <p>From city rides to long-distance trips, Yatrago helps travelers discover buses, compare options, and travel with confidence.</p>
         </div>
         <div class="story-card">
             Connecting Nepal, one journey at a time.
@@ -391,11 +322,11 @@
         <div class="mv-grid">
             <article class="mv-card mission">
                 <h3>Our Mission</h3>
-                <p>To simplify bus travel in Nepal by offering a reliable platform where passengers can find routes, compare options, and book confidently.</p>
+                <p>To simplify bus travel in Nepal through a reliable platform that helps passengers find, compare, and book journeys easily.</p>
             </article>
             <article class="mv-card vision">
                 <h3>Our Vision</h3>
-                <p>To become Nepal’s most trusted digital travel companion, making safe and comfortable road journeys accessible to every traveler.</p>
+                <p>To become Nepal’s most trusted digital bus travel companion with safe, comfortable, and accessible journeys for all.</p>
             </article>
         </div>
     </div>
@@ -413,7 +344,7 @@
             <article class="value-card">
                 <div class="icon-circle" aria-hidden="true">⏱️</div>
                 <h4>Reliability</h4>
-                <p>Timely schedules and dependable service help travelers plan with confidence.</p>
+                <p>Dependable schedules and smooth booking help travelers plan with confidence.</p>
             </article>
             <article class="value-card">
                 <div class="icon-circle" aria-hidden="true">💚</div>
@@ -461,12 +392,28 @@
         </div>
     </div>
 </section>
-
-<footer>
-    &copy; 2026 Yatrago. All rights reserved.
+<footer class="footer">
+    <span class="footer-brand">Yatra<span>Go</span></span>
+    &copy; 2026 YatraGo. Built for Nepal.
 </footer>
 
-</body>
-</html>
+<script>
+    (function () {
+        var nav = document.querySelector('.navbar');
+        var toggle = document.getElementById('navToggle');
+        var menu = document.getElementById('mainNav');
+        if (nav) {
+            window.addEventListener('scroll', function () {
+                nav.classList.toggle('scrolled', window.scrollY > 8);
+            }, { passive: true });
+        }
+        if (toggle && menu) {
+            toggle.addEventListener('click', function () {
+                menu.classList.toggle('nav-open');
+            });
+        }
+    }());
+</script>
+
 </body>
 </html>
