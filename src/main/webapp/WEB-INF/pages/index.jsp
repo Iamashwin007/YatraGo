@@ -21,6 +21,10 @@
         </a>
         <button class="hamburger" id="navToggle" aria-label="Toggle menu">&#9776;</button>
         <ul class="navbar-nav" id="mainNav">
+            <!-- Public links -->
+            <li><a href="${pageContext.request.contextPath}/pages/about" class="nav-link">About</a></li>
+            <li><a href="${pageContext.request.contextPath}/pages/contact" class="nav-link">Contact</a></li>
+
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <li><span class="nav-greeting">Hi, ${sessionScope.user.name}</span></li>
@@ -161,21 +165,21 @@
 </footer>
 
 <script>
-(function () {
-    var nav    = document.querySelector('.navbar');
-    var toggle = document.getElementById('navToggle');
-    var menu   = document.getElementById('mainNav');
-    if (nav) {
-        window.addEventListener('scroll', function () {
-            nav.classList.toggle('scrolled', window.scrollY > 8);
-        }, { passive: true });
-    }
-    if (toggle && menu) {
-        toggle.addEventListener('click', function () {
-            menu.classList.toggle('nav-open');
-        });
-    }
-}());
+    (function () {
+        var nav    = document.querySelector('.navbar');
+        var toggle = document.getElementById('navToggle');
+        var menu   = document.getElementById('mainNav');
+        if (nav) {
+            window.addEventListener('scroll', function () {
+                nav.classList.toggle('scrolled', window.scrollY > 8);
+            }, { passive: true });
+        }
+        if (toggle && menu) {
+            toggle.addEventListener('click', function () {
+                menu.classList.toggle('nav-open');
+            });
+        }
+    }());
 </script>
 
 <c:if test="${not empty sessionScope.flashMessage}">
