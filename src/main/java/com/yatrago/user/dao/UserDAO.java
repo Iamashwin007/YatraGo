@@ -70,4 +70,30 @@ public class UserDAO {
         }
         return null;
     }
+
+    public boolean updateName(int userId, String newName) {
+        String sql = "UPDATE users SET name = ? WHERE id = ?";
+        try (Connection con = DbConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, newName);
+            ps.setInt(2, userId);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("Error updating user name: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updatePassword(int userId, String newHashedPassword) {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+        try (Connection con = DbConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, newHashedPassword);
+            ps.setInt(2, userId);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("Error updating user password: " + e.getMessage());
+            return false;
+        }
+    }
 }
