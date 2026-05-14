@@ -356,10 +356,10 @@
         <a class="brand" href="<%= request.getContextPath() %>/">Yatrago</a>
         <ul class="nav-links">
             <li><a href="<%= request.getContextPath() %>/">Home</a></li>
-            <li><a class="active" href="<%= request.getContextPath() %>/pages/about.jsp">About</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/contact.jsp">Contact</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/login.jsp">Login</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/register.jsp">Register</a></li>
+            <li><a class="active" href="<%= request.getContextPath() %>/pages/about">About</a></li>
+            <li><a href="<%= request.getContextPath() %>/pages/contact">Contact</a></li>
+            <li><a href="<%= request.getContextPath() %>/pages/login">Login</a></li>
+            <li><a href="<%= request.getContextPath() %>/pages/register">Register</a></li>
         </ul>
     </div>
 </header>
@@ -429,19 +429,34 @@
         <h2 class="section-title">Meet Our Team</h2>
         <div class="team-grid">
             <article class="team-card">
-                <div class="avatar">SR</div>
-                <h4>Suman Rai</h4>
-                <p>Lead Developer</p>
+                <div class="avatar">AM</div>
+                <h4>Anuska Magar</h4>
+                <p>Authentication &amp; Security Developer</p>
             </article>
             <article class="team-card">
-                <div class="avatar">PS</div>
-                <h4>Priya Sharma</h4>
-                <p>UI/UX Designer</p>
+                <div class="avatar">AP</div>
+                <h4>Ashwin Pokhrel</h4>
+                <p>Team Lead &amp; Frontend Developer</p>
             </article>
             <article class="team-card">
-                <div class="avatar">BT</div>
-                <h4>Bikash Thapa</h4>
-                <p>Backend Engineer</p>
+                <div class="avatar">AJ</div>
+                <h4>Ashutosh Janga Thapa</h4>
+                <p>Schedule &amp; Booking Backend Developer</p>
+            </article>
+            <article class="team-card">
+                <div class="avatar">HB</div>
+                <h4>Hritika Biswakarma</h4>
+                <p>Admin Dashboard &amp; Bus Management</p>
+            </article>
+            <article class="team-card">
+                <div class="avatar">JK</div>
+                <h4>Jonrika Karki</h4>
+                <p>Database &amp; Route Management</p>
+            </article>
+            <article class="team-card">
+                <div class="avatar">NR</div>
+                <h4>Nisha Rai</h4>
+                <p>User/Driver Models &amp; Analytics</p>
             </article>
         </div>
     </div>
@@ -451,5 +466,7 @@
     &copy; 2026 Yatrago. All rights reserved.
 </footer>
 
+</body>
+</html>
 </body>
 </html>
