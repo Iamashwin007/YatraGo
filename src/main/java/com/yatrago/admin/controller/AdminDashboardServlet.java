@@ -1,5 +1,6 @@
 package com.yatrago.admin.controller;
 
+import com.yatrago.booking.dao.BookingDAO;
 import com.yatrago.bus.dao.BusDAO;
 import com.yatrago.route.dao.RouteDAO;
 import com.yatrago.schedule.dao.ScheduleDAO;
@@ -26,6 +27,11 @@ public class AdminDashboardServlet extends HttpServlet {
         req.setAttribute("routeCount",    routeDAO.getCount());
         req.setAttribute("scheduleCount", scheduleDAO.getCount());
         req.setAttribute("userCount",     userDAO.getCount());
+        BookingDAO bookingDAO = new BookingDAO();
+        req.setAttribute("totalBookings",     bookingDAO.getTotalBookingsCount());
+        req.setAttribute("totalRevenue",      bookingDAO.getTotalRevenue());
+        req.setAttribute("confirmedBookings", bookingDAO.getConfirmedBookingsCount());
+        req.setAttribute("bookingsPerRoute",  bookingDAO.getBookingsPerRoute());
         req.getRequestDispatcher("/WEB-INF/admin/dashboard.jsp").forward(req, resp);
     }
 }

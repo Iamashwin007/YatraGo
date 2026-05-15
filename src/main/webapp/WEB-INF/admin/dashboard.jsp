@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,6 +69,63 @@
                     <div class="stat-label">Registered Users</div>
                 </div>
             </div>
+        </div>
+
+        <p class="quick-actions-title">Bookings &amp; Revenue</p>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-blue">&#128203;</div>
+                <div>
+                    <div class="stat-value">${totalBookings}</div>
+                    <div class="stat-label">Total Bookings</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-green">&#9989;</div>
+                <div>
+                    <div class="stat-value">${confirmedBookings}</div>
+                    <div class="stat-label">Confirmed Bookings</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-orange">&#128176;</div>
+                <div>
+                    <div class="stat-value">NPR <fmt:formatNumber value="${totalRevenue}" maxFractionDigits="0" /></div>
+                    <div class="stat-label">Total Revenue</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-card" style="margin-bottom: 2rem;">
+            <div style="padding: 1.25rem 1.125rem;">
+                <p class="quick-actions-title">Bookings per Route</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Route</th>
+                        <th>Bookings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:choose>
+                        <c:when test="${empty bookingsPerRoute}">
+                            <tr>
+                                <td colspan="2" style="text-align: center; color: var(--clr-text-muted);">No bookings yet</td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="row" items="${bookingsPerRoute}">
+                                <tr>
+                                    <td>${row[0]}</td>
+                                    <td>${row[1]}</td>
+                                </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
         </div>
 
         <div class="quick-actions">
