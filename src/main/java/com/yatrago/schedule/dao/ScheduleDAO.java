@@ -33,10 +33,10 @@ public class ScheduleDAO {
     public ArrayList<ScheduleModel> getAllSchedules() {
         ArrayList<ScheduleModel> list = new ArrayList<>();
         String sql = "SELECT s.*, b.bus_number, b.operator_name, r.origin, r.destination " +
-                     "FROM schedules s " +
-                     "JOIN buses b ON s.bus_id = b.id " +
-                     "JOIN routes r ON s.route_id = r.id " +
-                     "ORDER BY s.journey_date, s.departure_time";
+                "FROM schedules s " +
+                "JOIN buses b ON s.bus_id = b.id " +
+                "JOIN routes r ON s.route_id = r.id " +
+                "ORDER BY s.journey_date, s.departure_time";
         try (Connection con = DbConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
@@ -51,10 +51,10 @@ public class ScheduleDAO {
 
     public ScheduleModel getScheduleById(int id) {
         String sql = "SELECT s.*, b.bus_number, b.operator_name, r.origin, r.destination " +
-                     "FROM schedules s " +
-                     "JOIN buses b ON s.bus_id = b.id " +
-                     "JOIN routes r ON s.route_id = r.id " +
-                     "WHERE s.id = ?";
+                "FROM schedules s " +
+                "JOIN buses b ON s.bus_id = b.id " +
+                "JOIN routes r ON s.route_id = r.id " +
+                "WHERE s.id = ?";
         try (Connection con = DbConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -113,11 +113,11 @@ public class ScheduleDAO {
     public List<ScheduleModel> searchSchedules(String origin, String destination, String journeyDate) {
         List<ScheduleModel> list = new ArrayList<>();
         String sql = "SELECT s.*, b.bus_number, b.operator_name, r.origin, r.destination " +
-                     "FROM schedules s " +
-                     "JOIN buses b ON s.bus_id = b.id " +
-                     "JOIN routes r ON s.route_id = r.id " +
-                     "WHERE r.origin = ? AND r.destination = ? AND s.journey_date = ? AND s.status = 'scheduled' AND s.available_seats > 0 " +
-                     "ORDER BY s.departure_time";
+                "FROM schedules s " +
+                "JOIN buses b ON s.bus_id = b.id " +
+                "JOIN routes r ON s.route_id = r.id " +
+                "WHERE r.origin = ? AND r.destination = ? AND s.journey_date = ? AND s.status = 'scheduled' AND s.available_seats > 0 " +
+                "ORDER BY s.departure_time";
         try (Connection con = DbConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, origin);
