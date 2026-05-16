@@ -211,3 +211,19 @@ CREATE TABLE IF NOT EXISTS payments (
 
     CONSTRAINT fk_payment_booking FOREIGN KEY (booking_id) REFERENCES bookings(id)
 );
+
+-- ============================================================
+-- 9. EMERGENCY_ALERTS
+--    Alerts raised by users (e.g. accident, breakdown) and
+--    broadcast by admins. raised_by_user_id references the
+--    user who raised the alert.
+-- ============================================================
+CREATE TABLE IF NOT EXISTS emergency_alerts (
+                                                id                INT          PRIMARY KEY AUTO_INCREMENT,
+                                                message           TEXT         NOT NULL,
+                                                raised_by_user_id INT          NOT NULL,
+                                                status            ENUM('active','resolved') NOT NULL DEFAULT 'active',
+    created_at        TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_alert_user FOREIGN KEY (raised_by_user_id) REFERENCES users(id)
+    );
