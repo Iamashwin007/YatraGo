@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleDAO {
 
@@ -107,6 +108,29 @@ public class ScheduleDAO {
             System.out.println("Error getting schedule count: " + e.getMessage());
         }
         return 0;
+    }
+
+    public List<ScheduleModel> searchSchedules(String origin, String destination, String journeyDate) {
+        List<ScheduleModel> list = new ArrayList<>();
+        String sql = "SELECT s.*, b.bus_number, b.operator_name, r.origin, r.destination " +
+                     "FROM schedules s " +
+                     "JOIN buses b ON s.bus_id = b.id " +
+                     "JOIN routes r ON s.route_id = r.id " +
+                     "WHERE r.origin = ? AND r.destination = ? AND s.journey_date = ? AND s.status = 'scheduled' AND s.available_seats > 0 " +
+                     "ORDER BY s.departure_time";
+        try (Connection con = DbConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, origin);
+            ps.setString(2, destination);
+            ps.setString(3, journeyDate);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(mapRow(rs));
+            }
+        } catch (Exception e) {
+            System.out.println("Error searching schedules: " + e.getMessage());
+        }
+        return list;
     }
 
     private ScheduleModel mapRow(ResultSet rs) throws Exception {
