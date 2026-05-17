@@ -60,7 +60,7 @@ public class UpdateDriverServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Step 1: Read all the form fields
+        // Read all the form fields
         String idStr         = req.getParameter("id");
         String name          = req.getParameter("name").trim();
         String licenseNumber = req.getParameter("licenseNumber").trim();
@@ -87,7 +87,7 @@ public class UpdateDriverServlet extends HttpServlet {
         driver.setPhone(phone);
         driver.setStatus(status);
 
-        // Step 2: Validate required fields
+        // Validate required fields
         if (name.isEmpty() || licenseNumber.isEmpty() || phone.isEmpty() || expStr.isEmpty()) {
             req.setAttribute("error", "All required fields must be filled.");
             req.setAttribute("driver", driver);
@@ -95,7 +95,7 @@ public class UpdateDriverServlet extends HttpServlet {
             return;
         }
 
-        // Step 3: Validate experience years
+        // Validate experience years
         int experienceYears;
         try {
             experienceYears = Integer.parseInt(expStr);
@@ -107,11 +107,11 @@ public class UpdateDriverServlet extends HttpServlet {
             return;
         }
 
-        // Step 4: Complete filling the model
+        // Complete filling the model
         driver.setExperienceYears(experienceYears);
         driver.setBusId(busIdStr.isEmpty() ? null : Integer.parseInt(busIdStr));
 
-        // Step 5: Save to DB and redirect or show error
+        // Save to DB and redirect or show error
         DriverDAO driverDAO = new DriverDAO();
         if (driverDAO.updateDriver(driver)) {
             FlashUtil.setMessage(req, "success", "Driver updated successfully.");

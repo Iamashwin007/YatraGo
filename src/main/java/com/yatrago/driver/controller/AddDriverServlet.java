@@ -29,7 +29,7 @@ public class AddDriverServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Step 1: Read everything the user typed in the form
+        // Read everything the user typed in the form
         String name          = req.getParameter("name").trim();
         String licenseNumber = req.getParameter("licenseNumber").trim();
         String phone         = req.getParameter("phone").trim();
@@ -37,14 +37,14 @@ public class AddDriverServlet extends HttpServlet {
         String busIdStr      = req.getParameter("busId").trim();   // optional — can be blank
         String status        = req.getParameter("status").trim();
 
-        // Step 2: Make sure required fields are not empty
+        // Make sure required fields are not empty
         if (name.isEmpty() || licenseNumber.isEmpty() || phone.isEmpty() || expStr.isEmpty()) {
             req.setAttribute("error", "All required fields must be filled.");
             req.getRequestDispatcher("/WEB-INF/admin/drivers/add-driver.jsp").forward(req, resp);
             return; // stop here, show the form again with the error
         }
 
-        // Step 3: Make sure experience years is actually a valid number
+        // Make sure experience years is actually a valid number
         int experienceYears;
         try {
             experienceYears = Integer.parseInt(expStr);
@@ -55,7 +55,7 @@ public class AddDriverServlet extends HttpServlet {
             return;
         }
 
-        // Step 4: Check if this license number is already taken
+        // Check if this license number is already taken
         DriverDAO driverDAO = new DriverDAO();
         if (driverDAO.isLicenseExist(licenseNumber)) {
             req.setAttribute("error", "License number '" + licenseNumber + "' is already registered.");
@@ -63,7 +63,7 @@ public class AddDriverServlet extends HttpServlet {
             return;
         }
 
-        // Step 5: Build the DriverModel object with all the data
+        // Build the DriverModel object with all the data
         DriverModel driver = new DriverModel();
         driver.setName(name);
         driver.setLicenseNumber(licenseNumber);
@@ -72,7 +72,7 @@ public class AddDriverServlet extends HttpServlet {
         driver.setBusId(busIdStr.isEmpty() ? null : Integer.parseInt(busIdStr)); // null if left blank
         driver.setStatus(status.isEmpty() ? "active" : status); // default to active
 
-        // Step 6: Save to database and redirect or show error
+        // Save to database and redirect or show error
         if (driverDAO.addDriver(driver)) {
             FlashUtil.setMessage(req, "success", "Driver added successfully.");
             resp.sendRedirect(req.getContextPath() + "/admin/driver-list");

@@ -2,31 +2,24 @@ package com.yatrago.driver.model;
 
 import java.sql.Timestamp;
 
-// This class represents one row in the "drivers" table.
-// Think of it like a form — each field here matches a column in the database.
 public class DriverModel {
 
-    // These are all the columns in the drivers table
+    // all the columns in the drivers table
     private int id;
     private String name;
     private String licenseNumber;
     private String phone;
     private int experienceYears;
 
-    // bus_id can be NULL in the database (driver not assigned to any bus yet)
-    // We use Integer (capital I) instead of int so it can hold null
     private Integer busId;
 
-    // This one is NOT a database column — we fill it from a JOIN query
-    // so the JSP can show the bus number instead of just a number ID
     private String busNumber;
 
     private String status;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    // --- Getters and Setters ---
-    // These let other classes read and write the fields above
+    //  Getters and Setters
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

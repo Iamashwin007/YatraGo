@@ -8,15 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-// DAO = Data Access Object
-// This class is the only one that talks to the database.
-// The servlets call methods here — they never write SQL themselves.
 public class DriverDAO {
 
-    // -----------------------------------------------------------
     // CHECK: does a driver with this license number already exist?
-    // Used in AddDriverServlet to prevent duplicates.
-    // -----------------------------------------------------------
     public boolean isLicenseExist(String licenseNumber) {
         String sql = "SELECT id FROM drivers WHERE license_number = ?";
         try (Connection con = DbConnection.getConnection();
@@ -32,10 +26,8 @@ public class DriverDAO {
         }
     }
 
-    // -----------------------------------------------------------
     // CREATE: insert a new driver into the database
     // Returns true if it worked, false if something went wrong.
-    // -----------------------------------------------------------
     public boolean addDriver(DriverModel driver) {
         String sql = "INSERT INTO drivers (name, license_number, phone, experience_years, bus_id, status) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
@@ -64,10 +56,8 @@ public class DriverDAO {
         }
     }
 
-    // -----------------------------------------------------------
     // READ ALL: get every driver, with their assigned bus number
     // We use a LEFT JOIN so drivers with no bus still appear.
-    // -----------------------------------------------------------
     public ArrayList<DriverModel> getAllDrivers() {
         ArrayList<DriverModel> drivers = new ArrayList<>();
 
@@ -95,10 +85,8 @@ public class DriverDAO {
         return drivers;
     }
 
-    // -----------------------------------------------------------
     // READ ONE: get a single driver by their ID
     // Used by UpdateDriverServlet to pre-fill the edit form.
-    // -----------------------------------------------------------
     public DriverModel getDriverById(int id) {
         String sql = "SELECT * FROM drivers WHERE id = ?";
         try (Connection con = DbConnection.getConnection();
@@ -117,9 +105,7 @@ public class DriverDAO {
         return null; // not found
     }
 
-    // -----------------------------------------------------------
     // UPDATE: save changes to an existing driver
-    // -----------------------------------------------------------
     public boolean updateDriver(DriverModel driver) {
         String sql = "UPDATE drivers SET name=?, license_number=?, phone=?, " +
                 "experience_years=?, bus_id=?, status=? WHERE id=?";
@@ -148,9 +134,7 @@ public class DriverDAO {
         }
     }
 
-    // -----------------------------------------------------------
-    // DELETE: remove a driver by ID
-    // -----------------------------------------------------------
+    // remove a driver by ID
     public boolean deleteDriver(int id) {
         String sql = "DELETE FROM drivers WHERE id = ?";
         try (Connection con = DbConnection.getConnection();
@@ -165,11 +149,9 @@ public class DriverDAO {
         }
     }
 
-    // -----------------------------------------------------------
-    // PRIVATE HELPER: turns one ResultSet row into a DriverModel
-    // We use this in both getAllDrivers() and getDriverById()
-    // to avoid writing the same mapping code twice.
-    // -----------------------------------------------------------
+    // turns one ResultSet row into a DriverModel
+    // We use this in both getAllDrivers() and getDriverById() to avoid writing the same mapping code twice.
+
     private DriverModel mapRow(ResultSet rs) throws Exception {
         DriverModel d = new DriverModel();
         d.setId(rs.getInt("id"));
@@ -178,8 +160,6 @@ public class DriverDAO {
         d.setPhone(rs.getString("phone"));
         d.setExperienceYears(rs.getInt("experience_years"));
 
-        // Tricky part: rs.getInt("bus_id") returns 0 when the DB value is NULL
-        // rs.wasNull() tells us if the last column read was actually NULL
         int busId = rs.getInt("bus_id");
         d.setBusId(rs.wasNull() ? null : busId);
 
