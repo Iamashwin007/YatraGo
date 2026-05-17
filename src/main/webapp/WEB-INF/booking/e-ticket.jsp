@@ -165,6 +165,25 @@
             padding: 0.3rem 0.75rem;
         }
 
+        .ticket-seat-list {
+            margin-top: 0.875rem;
+            display: grid;
+            gap: 0.5rem;
+        }
+        .ticket-seat-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-sm);
+            background: var(--clr-bg);
+            font-size: 0.875rem;
+            color: var(--clr-text);
+        }
+        .ticket-seat-row span { color: var(--clr-text-muted); font-size: 0.8125rem; }
+
         /* Footer strip */
         .ticket-footer {
             background: var(--clr-border-light);
@@ -236,7 +255,6 @@
                         <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
                     </c:if>
                     <li><a href="${pageContext.request.contextPath}/search" class="nav-link">Search</a></li>
-                    <li><a href="${pageContext.request.contextPath}/my-bookings" class="nav-link">My Bookings</a></li>
                     <li><a href="${pageContext.request.contextPath}/profile" class="nav-link">Profile</a></li>
                     <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
                 </c:when>
@@ -264,12 +282,12 @@
                     <div class="ticket-top">
                         <div class="ticket-brand">YatraGo &mdash; E-Ticket</div>
                         <div class="ticket-ref-label">Booking Reference</div>
-                        <div class="ticket-ref">${booking.bookingRef}</div>
-                        <div class="ticket-route-row">
-                            <span class="ticket-city">${booking.routeOrigin}</span>
-                            <span class="ticket-route-arrow">&#8594;</span>
-                            <span class="ticket-city">${booking.routeDestination}</span>
-                        </div>
+                    <div class="ticket-ref">${booking.bookingReference}</div>
+                    <div class="ticket-route-row">
+                        <span class="ticket-city">${booking.origin}</span>
+                        <span class="ticket-route-arrow">&#8594;</span>
+                        <span class="ticket-city">${booking.destination}</span>
+                    </div>
                     </div>
 
                     <%-- ── Tear-off divider ── --%>
@@ -291,10 +309,8 @@
                                 <div class="ticket-detail-value">${booking.busNumber}</div>
                             </div>
                             <div class="ticket-detail-item">
-                                <div class="ticket-detail-label">Journey Date</div>
-                                <div class="ticket-detail-value">
-                                    <fmt:formatDate value="${booking.journeyDate}" pattern="MMM d, yyyy" />
-                                </div>
+                                <div class="ticket-detail-label">Bus Type</div>
+                                <div class="ticket-detail-value">${booking.busType}</div>
                             </div>
                             <div class="ticket-detail-item">
                                 <div class="ticket-detail-label">Departure</div>
@@ -303,14 +319,12 @@
                                 </div>
                             </div>
                             <div class="ticket-detail-item">
-                                <div class="ticket-detail-label">Booking Date</div>
-                                <div class="ticket-detail-value">
-                                    <fmt:formatDate value="${booking.bookingDate}" pattern="MMM d, yyyy" />
-                                </div>
+                                <div class="ticket-detail-label">Status</div>
+                                <div class="ticket-detail-value">${booking.bookingStatus}</div>
                             </div>
                             <div class="ticket-detail-item">
                                 <div class="ticket-detail-label">Total Seats</div>
-                                <div class="ticket-detail-value">${booking.totalSeats}</div>
+                                <div class="ticket-detail-value">${booking.passengerCount}</div>
                             </div>
                         </div>
 
@@ -319,8 +333,8 @@
                             <div class="ticket-seats-label">Seat Numbers</div>
                             <div class="ticket-seats-row">
                                 <c:choose>
-                                    <c:when test="${not empty seats}">
-                                        <c:forEach var="seat" items="${seats}">
+                                    <c:when test="${not empty booking.seats}">
+                                        <c:forEach var="seat" items="${booking.seats}">
                                             <span class="ticket-seat-tag">${seat.seatNumber}</span>
                                         </c:forEach>
                                     </c:when>
@@ -329,6 +343,16 @@
                                     </c:otherwise>
                                 </c:choose>
                             </div>
+                            <c:if test="${not empty booking.seats}">
+                                <div class="ticket-seat-list">
+                                    <c:forEach var="seat" items="${booking.seats}">
+                                        <div class="ticket-seat-row">
+                                            <div><strong>${seat.seatNumber}</strong> &mdash; ${seat.passengerName}</div>
+                                            <span>Age: ${seat.passengerAge}</span>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
 
@@ -337,12 +361,11 @@
                         <div>
                             <div class="ticket-total-label">Total Amount</div>
                             <div class="ticket-total">
-                                NPR <fmt:formatNumber value="${booking.totalAmount}" maxFractionDigits="0" />
+                                NPR <fmt:formatNumber value="${booking.totalFare}" maxFractionDigits="0" />
                             </div>
                         </div>
                         <div class="ticket-badges">
-                            <span class="badge badge-${booking.status}">${booking.status}</span>
-                            <span class="badge badge-${booking.paymentStatus}">${booking.paymentStatus}</span>
+                            <span class="badge badge-${booking.bookingStatus}">${booking.bookingStatus}</span>
                         </div>
                     </div>
 

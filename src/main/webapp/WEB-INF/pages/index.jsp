@@ -24,8 +24,22 @@
             <li><a href="${pageContext.request.contextPath}/" class="nav-link">Home</a></li>
             <li><a href="${pageContext.request.contextPath}/pages/about" class="nav-link">About</a></li>
             <li><a href="${pageContext.request.contextPath}/pages/contact" class="nav-link">Contact</a></li>
-            <li><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
-            <li><a href="${pageContext.request.contextPath}/register" class="nav-link nav-link-cta">Register</a></li>
+            <c:if test="${not empty sessionScope.user and sessionScope.user.role == 'admin'}">
+                <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
+            </c:if>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <li><a href="${pageContext.request.contextPath}/search" class="nav-link">Search</a></li>
+                    <li><a href="${pageContext.request.contextPath}/my-bookings" class="nav-link">My Bookings</a></li>
+                    <li><a href="${pageContext.request.contextPath}/profile" class="nav-link">Profile</a></li>
+                    <li><span class="nav-greeting">Hi, ${sessionScope.user.name}</span></li>
+                    <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
+                    <li><a href="${pageContext.request.contextPath}/register" class="nav-link nav-link-cta">Register</a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 </nav>
@@ -43,32 +57,17 @@
                 No queues, no guesswork. Just travel.
             </p>
             <div class="hero-actions">
-                <a href="${pageContext.request.contextPath}/register" class="btn btn-accent btn-lg">Get Started</a>
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-white btn-lg">Sign In</a>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user}">
+                        <a href="${pageContext.request.contextPath}/search" class="btn btn-accent btn-lg">Search Buses</a>
+                        <a href="${pageContext.request.contextPath}/my-bookings" class="btn btn-outline-white btn-lg">My Bookings</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/register" class="btn btn-accent btn-lg">Get Started</a>
+                        <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-white btn-lg">Sign In</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
-        </div>
-    </section>
-
-    <!-- Search hint — visual preview of the M2 search flow -->
-    <section class="search-hint">
-        <div class="search-hint-card">
-            <div class="search-hint-field">
-                <span class="search-hint-label">From</span>
-                <div class="search-hint-input">Kathmandu</div>
-            </div>
-            <div class="search-hint-sep">&#8594;</div>
-            <div class="search-hint-field">
-                <span class="search-hint-label">To</span>
-                <div class="search-hint-input">Pokhara</div>
-            </div>
-            <div class="search-hint-field">
-                <span class="search-hint-label">Date</span>
-                <div class="search-hint-input">May 4, 2026</div>
-            </div>
-            <div class="search-hint-actions">
-                <button class="btn btn-primary" disabled style="opacity:.5;cursor:default;">Search Buses</button>
-            </div>
-            <p class="search-hint-note">&#128337; Full seat search coming soon</p>
         </div>
     </section>
 

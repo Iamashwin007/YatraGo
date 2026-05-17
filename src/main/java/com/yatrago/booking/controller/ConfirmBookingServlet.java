@@ -81,20 +81,13 @@ public class ConfirmBookingServlet extends HttpServlet {
         booking.setBookingStatus("confirmed");
 
         // 8. Build seat list
-        // seatNumber from JSP is a string like "1A", "2C" — we extract the row number (integer part)
+        // seatNumber from JSP is a string like "1A", "2C" — store full label
         ArrayList<BookingSeatModel> seats = new ArrayList<>();
         for (int i = 0; i < passengerCount; i++) {
             BookingSeatModel seat = new BookingSeatModel();
 
-            // Extract numeric part from seat label e.g. "1A" -> 1, "10C" -> 10
             String seatLabel = seatNumbers[i];
-            int seatNum;
-            try {
-                seatNum = Integer.parseInt(seatLabel.replaceAll("[^0-9]", ""));
-            } catch (NumberFormatException e) {
-                seatNum = i + 1; // fallback
-            }
-            seat.setSeatNumber(seatNum);
+            seat.setSeatNumber(seatLabel);
 
             // Passenger name
             String name = (passengerNames != null && i < passengerNames.length)

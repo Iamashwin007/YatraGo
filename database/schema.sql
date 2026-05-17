@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS bookings (
 CREATE TABLE IF NOT EXISTS booking_seats (
     id             INT          PRIMARY KEY AUTO_INCREMENT,
     booking_id     INT          NOT NULL,
-    seat_number    INT          NOT NULL,
+    seat_number    VARCHAR(5)   NOT NULL,
     passenger_name VARCHAR(100) NOT NULL,
     passenger_age  INT,
     created_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,

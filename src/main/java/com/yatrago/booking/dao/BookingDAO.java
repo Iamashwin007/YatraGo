@@ -99,6 +99,10 @@ public class BookingDAO {
                 "INSERT INTO booking_seats (booking_id, seat_number, passenger_name, passenger_age) " +
                         "VALUES (?, ?, ?, ?)";
 
+        String seatsUpdateSql =
+                "UPDATE schedules SET available_seats = available_seats - ? " +
+                        "WHERE id = ? AND available_seats >= ?";
+
         try (Connection con = DbConnection.getConnection()) {
 
             if (con == null) return false;
@@ -136,7 +140,7 @@ public class BookingDAO {
             try (PreparedStatement seatPs = con.prepareStatement(seatSql)) {
                 for (BookingSeatModel seat : seats) {
                     seatPs.setInt(1, seat.getBookingId());
-                    seatPs.setInt(2, seat.getSeatNumber());
+                    seatPs.setString(2, seat.getSeatNumber());
                     seatPs.setString(3, seat.getPassengerName());
                     if (seat.getPassengerAge() != null) {
                         seatPs.setInt(4, seat.getPassengerAge());
@@ -148,6 +152,18 @@ public class BookingDAO {
                 seatPs.executeBatch();
             }
 
+            try (PreparedStatement seatsPs = con.prepareStatement(seatsUpdateSql)) {
+                int passengerCount = booking.getPassengerCount();
+                seatsPs.setInt(1, passengerCount);
+                seatsPs.setInt(2, booking.getScheduleId());
+                seatsPs.setInt(3, passengerCount);
+                int updated = seatsPs.executeUpdate();
+                if (updated == 0) {
+                    con.rollback();
+                    return false;
+                }
+            }
+
             con.commit();
             return true;
 
@@ -155,6 +171,40 @@ public class BookingDAO {
             System.out.println("Error creating booking: " + e.getMessage());
             return false;
         }
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  METHOD — getTakenSeatRowsBySchedule
+    //  Returns distinct seat_number values for a schedule (non-cancelled).
+    // ══════════════════════════════════════════════════════════════════════
+    public ArrayList<String> getTakenSeatRowsBySchedule(int scheduleId) {
+
+        ArrayList<String> seats = new ArrayList<>();
+
+        String sql =
+                "SELECT DISTINCT bs.seat_number " +
+                        "FROM booking_seats bs " +
+                        "JOIN bookings b ON bs.booking_id = b.id " +
+                        "WHERE b.schedule_id = ? AND b.booking_status != 'cancelled' " +
+                        "ORDER BY bs.seat_number";
+
+        try (Connection con = DbConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            if (con == null) return seats;
+
+            ps.setInt(1, scheduleId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                seats.add(rs.getString("seat_number"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error getting taken seats: " + e.getMessage());
+        }
+
+        return seats;
     }
 
     // ══════════════════════════════════════════════════════════════════════
@@ -246,7 +296,7 @@ public class BookingDAO {
                     BookingSeatModel seat = new BookingSeatModel();
                     seat.setId(srs.getInt("id"));
                     seat.setBookingId(srs.getInt("booking_id"));
-                    seat.setSeatNumber(srs.getInt("seat_number"));
+            seat.setSeatNumber(srs.getString("seat_number"));
                     seat.setPassengerName(srs.getString("passenger_name"));
                     seat.setPassengerAge((Integer) srs.getObject("passenger_age"));
                     seat.setCreatedAt(srs.getTimestamp("created_at"));

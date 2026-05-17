@@ -7,7 +7,7 @@ public class BookingSeatModel {
     // ── booking_seats table columns ────────────────────────────────────────
     private int       id;
     private int       bookingId;
-    private int       seatNumber;
+    private String    seatNumber;
     private String    passengerName;  // nullable in DB
     private Integer   passengerAge;   // Integer (not int) — nullable in DB
     private Timestamp createdAt;
@@ -22,8 +22,8 @@ public class BookingSeatModel {
     public int getBookingId() { return bookingId; }
     public void setBookingId(int bookingId) { this.bookingId = bookingId; }
 
-    public int getSeatNumber() { return seatNumber; }
-    public void setSeatNumber(int seatNumber) { this.seatNumber = seatNumber; }
+    public String getSeatNumber() { return seatNumber; }
+    public void setSeatNumber(String seatNumber) { this.seatNumber = seatNumber; }
 
     public String getPassengerName() { return passengerName; }
     public void setPassengerName(String passengerName) { this.passengerName = passengerName; }

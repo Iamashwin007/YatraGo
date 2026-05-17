@@ -155,7 +155,6 @@
                         <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
                     </c:if>
                     <li><a href="${pageContext.request.contextPath}/search" class="nav-link">Search</a></li>
-                    <li><a href="${pageContext.request.contextPath}/my-bookings" class="nav-link active">My Bookings</a></li>
                     <li><a href="${pageContext.request.contextPath}/profile" class="nav-link">Profile</a></li>
                     <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
                 </c:when>
@@ -193,18 +192,17 @@
 
                             <%-- Reference + status badges --%>
                             <div class="booking-card-top">
-                                <div class="booking-ref">${booking.bookingRef}</div>
+                                <div class="booking-ref">${booking.bookingReference}</div>
                                 <div class="booking-badges">
-                                    <span class="badge badge-${booking.status}">${booking.status}</span>
-                                    <span class="badge badge-${booking.paymentStatus}">${booking.paymentStatus}</span>
+                                    <span class="badge badge-${booking.bookingStatus}">${booking.bookingStatus}</span>
                                 </div>
                             </div>
 
                             <%-- Route --%>
                             <div class="booking-route">
-                                ${booking.routeOrigin}
+                                ${booking.origin}
                                 <span class="booking-route-arrow">&#8594;</span>
-                                ${booking.routeDestination}
+                                ${booking.destination}
                             </div>
 
                             <%-- Detail strip --%>
@@ -218,20 +216,16 @@
                                     ${booking.busNumber}
                                 </div>
                                 <div class="booking-meta-item">
-                                    <span>Journey Date</span>
-                                    <fmt:formatDate value="${booking.journeyDate}" pattern="MMM d, yyyy" />
-                                </div>
-                                <div class="booking-meta-item">
                                     <span>Departure</span>
                                     <fmt:formatDate value="${booking.departureTime}" pattern="hh:mm a" />
                                 </div>
                                 <div class="booking-meta-item">
                                     <span>Seats</span>
-                                    ${booking.totalSeats}
+                                    ${booking.passengerCount}
                                 </div>
                                 <div class="booking-meta-item">
                                     <span>Total</span>
-                                    NPR <fmt:formatNumber value="${booking.totalAmount}" maxFractionDigits="0" />
+                                    NPR <fmt:formatNumber value="${booking.totalFare}" maxFractionDigits="0" />
                                 </div>
                             </div>
 
@@ -241,7 +235,7 @@
                             <div class="booking-actions">
 
                                 <%-- Cancel — only for confirmed bookings --%>
-                                <c:if test="${booking.status == 'confirmed'}">
+                                <c:if test="${booking.bookingStatus == 'confirmed'}">
                                     <form method="post"
                                           action="${pageContext.request.contextPath}/cancel-booking"
                                           onsubmit="return confirm('Cancel this booking? This cannot be undone.');">

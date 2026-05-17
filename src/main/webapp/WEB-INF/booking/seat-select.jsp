@@ -371,9 +371,9 @@
 (function () {
     'use strict';
 
-    /* Seats already booked — populated by SeatSelectServlet in a future sprint.
+    /* Seats already booked — populated by SeatSelectServlet.
        Format: array of strings matching data-seat values, e.g. ['1A', '3C']. */
-    var takenSeats = [];
+    var takenSeats = ${empty takenSeatsJson ? "[]" : takenSeatsJson};
 
     var selectedSeats = [];
 
