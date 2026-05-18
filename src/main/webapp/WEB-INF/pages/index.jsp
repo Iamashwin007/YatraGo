@@ -20,20 +20,11 @@
         </a>
         <button class="hamburger" id="navToggle" aria-label="Toggle menu">&#9776;</button>
         <ul class="navbar-nav" id="mainNav">
-            <c:choose>
-                <c:when test="${not empty sessionScope.user}">
-                    <li><span class="nav-greeting">Hi, ${sessionScope.user.name}</span></li>
-                    <c:if test="${sessionScope.user.role == 'admin'}">
-                        <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
-                    </c:if>
-                    <li><a href="${pageContext.request.contextPath}/profile" class="nav-link">Profile</a></li>
-                    <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
-                    <li><a href="${pageContext.request.contextPath}/register" class="nav-link nav-link-cta">Register</a></li>
-                </c:otherwise>
-            </c:choose>
+            <li><a href="${pageContext.request.contextPath}/" class="nav-link">Home</a></li>
+            <li><a href="${pageContext.request.contextPath}/pages/about" class="nav-link">About</a></li>
+            <li><a href="${pageContext.request.contextPath}/pages/contact" class="nav-link">Contact</a></li>
+            <li><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
+            <li><a href="${pageContext.request.contextPath}/register" class="nav-link nav-link-cta">Register</a></li>
         </ul>
     </div>
 </nav>
@@ -43,6 +34,7 @@
         <div class="hero-bg-line hero-bg-line-1"></div>
         <div class="hero-bg-line hero-bg-line-2"></div>
         <div class="hero-inner">
+<<<<<<< HEAD
             <div class="hero-copy">
                 <span class="hero-badge">Nepal&#39;s Bus Booking Platform</span>
                 <h1 class="hero-title">Travel <span>Nepal</span>,<br>the easy way.</h1>
@@ -78,6 +70,19 @@
                         <strong>Available soon</strong>
                     </div>
                 </div>
+=======
+            <span class="hero-badge">Nepal&#39;s Bus Booking Platform</span>
+            <h1 class="hero-title">
+                Travel <span>Nepal</span>,<br>the easy way.
+            </h1>
+            <p class="hero-subtitle">
+                Search routes, pick your seat, and get your e-ticket in minutes.
+                No queues, no guesswork. Just travel.
+            </p>
+            <div class="hero-actions">
+                <a href="${pageContext.request.contextPath}/register" class="btn btn-accent btn-lg">Get Started</a>
+                <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-white btn-lg">Sign In</a>
+>>>>>>> 83ddf3ba45ba2e280e4339d02ebc78a89a077e34
             </div>
         </div>
     </section>
@@ -190,21 +195,21 @@
 </footer>
 
 <script>
-(function () {
-    var nav    = document.querySelector('.navbar');
-    var toggle = document.getElementById('navToggle');
-    var menu   = document.getElementById('mainNav');
-    if (nav) {
-        window.addEventListener('scroll', function () {
-            nav.classList.toggle('scrolled', window.scrollY > 8);
-        }, { passive: true });
-    }
-    if (toggle && menu) {
-        toggle.addEventListener('click', function () {
-            menu.classList.toggle('nav-open');
-        });
-    }
-}());
+    (function () {
+        var nav    = document.querySelector('.navbar');
+        var toggle = document.getElementById('navToggle');
+        var menu   = document.getElementById('mainNav');
+        if (nav) {
+            window.addEventListener('scroll', function () {
+                nav.classList.toggle('scrolled', window.scrollY > 8);
+            }, { passive: true });
+        }
+        if (toggle && menu) {
+            toggle.addEventListener('click', function () {
+                menu.classList.toggle('nav-open');
+            });
+        }
+    }());
 </script>
 
 <c:if test="${not empty sessionScope.flashMessage}">
