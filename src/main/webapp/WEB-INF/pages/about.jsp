@@ -27,7 +27,7 @@
     <section class="subpage-hero">
         <div class="container subpage-hero-inner">
             <span class="hero-badge">About YatraGo</span>
-            <h1>Built for smoother bus travel across Nepal.</h1>
+            <h1>Built for smoother bus travel across <span>Nepal</span>.</h1>
             <p>Your trusted companion for safe, affordable, and comfortable bus travel across Nepal.</p>
         </div>
     </section>
@@ -40,7 +40,10 @@
                 <p>We connect passengers to routes across the country with a simple, reliable booking experience built around convenience and trust.</p>
                 <p>From city rides to long-distance trips, YatraGo helps travelers discover buses, compare options, and travel with confidence.</p>
             </div>
-            <div class="story-card">Connecting Nepal, one journey at a time.</div>
+            <div class="story-card story-image-card">
+                <img src="<%= request.getContextPath() %>/images/aboutus.jpg" alt="YatraGo team and Nepal bus travel">
+                <div class="story-image-caption">Connecting Nepal, one journey at a time.</div>
+            </div>
         </div>
     </section>
 
