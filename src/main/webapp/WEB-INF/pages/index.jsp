@@ -34,7 +34,6 @@
         <div class="hero-bg-line hero-bg-line-1"></div>
         <div class="hero-bg-line hero-bg-line-2"></div>
         <div class="hero-inner">
-<<<<<<< HEAD
             <div class="hero-copy">
                 <span class="hero-badge">Nepal&#39;s Bus Booking Platform</span>
                 <h1 class="hero-title">Travel <span>Nepal</span>,<br>the easy way.</h1>
@@ -56,11 +55,6 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <div class="hero-stats">
-                    <div><strong>10k+</strong><span>Travelers</span></div>
-                    <div><strong>50+</strong><span>Partners</span></div>
-                    <div><strong>24/7</strong><span>Support</span></div>
-                </div>
             </div>
             <div class="hero-media">
                 <div class="hero-image-card">
@@ -70,19 +64,6 @@
                         <strong>Available soon</strong>
                     </div>
                 </div>
-=======
-            <span class="hero-badge">Nepal&#39;s Bus Booking Platform</span>
-            <h1 class="hero-title">
-                Travel <span>Nepal</span>,<br>the easy way.
-            </h1>
-            <p class="hero-subtitle">
-                Search routes, pick your seat, and get your e-ticket in minutes.
-                No queues, no guesswork. Just travel.
-            </p>
-            <div class="hero-actions">
-                <a href="${pageContext.request.contextPath}/register" class="btn btn-accent btn-lg">Get Started</a>
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-outline-white btn-lg">Sign In</a>
->>>>>>> 83ddf3ba45ba2e280e4339d02ebc78a89a077e34
             </div>
         </div>
     </section>
