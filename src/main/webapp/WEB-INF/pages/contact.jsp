@@ -10,19 +10,7 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="container">
-        <a href="<%= request.getContextPath() %>/" class="navbar-brand">Yatra<span>Go</span></a>
-        <button class="hamburger" id="navToggle" aria-label="Toggle menu">&#9776;</button>
-        <ul class="navbar-nav" id="mainNav">
-            <li><a href="<%= request.getContextPath() %>/" class="nav-link">Home</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/about" class="nav-link">About</a></li>
-            <li><a href="<%= request.getContextPath() %>/pages/contact" class="nav-link active">Contact</a></li>
-            <li><a href="<%= request.getContextPath() %>/login" class="nav-link">Login</a></li>
-            <li><a href="<%= request.getContextPath() %>/register" class="nav-link nav-link-cta">Register</a></li>
-        </ul>
-    </div>
-</nav>
+<%@ include file="/WEB-INF/includes/navbar.jsp" %>
 
 <main class="subpage-main">
     <section class="subpage-hero">

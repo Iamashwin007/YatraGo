@@ -28,6 +28,10 @@
                 <li><a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">Admin Dashboard</a></li>
             </c:if>
             <c:choose>
+                <c:when test="${not empty sessionScope.user and sessionScope.user.role == 'admin'}">
+                    <li><span class="nav-greeting">Hi, ${sessionScope.user.name}</span></li>
+                    <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
+                </c:when>
                 <c:when test="${not empty sessionScope.user}">
                     <li><a href="${pageContext.request.contextPath}/search" class="nav-link">Search</a></li>
                     <li><a href="${pageContext.request.contextPath}/my-bookings" class="nav-link">My Bookings</a></li>
