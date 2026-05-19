@@ -19,8 +19,10 @@ public class AuthFilter implements Filter {
 
         if (SessionUtil.isAdmin(req)) {
             chain.doFilter(request, response);
-        } else {
+        } else if (SessionUtil.getUser(req) == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
+        } else {
+            req.getRequestDispatcher("/WEB-INF/pages/access-denied.jsp").forward(req, resp);
         }
     }
 }
