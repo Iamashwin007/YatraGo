@@ -17,3 +17,4 @@
             <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
         </ul>
     </div>
+</nav>
