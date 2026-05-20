@@ -54,30 +54,6 @@
         </div>
     </section>
 
-    <section class="search-hint">
-        <div class="search-hint-card">
-            <div class="search-hint-field">
-                <span class="search-hint-icon">&#128205;</span>
-                <span class="search-hint-label">From</span>
-                <div class="search-hint-input">Kathmandu</div>
-            </div>
-            <div class="search-hint-sep">&#8594;</div>
-            <div class="search-hint-field">
-                <span class="search-hint-icon">&#127937;</span>
-                <span class="search-hint-label">To</span>
-                <div class="search-hint-input">Pokhara</div>
-            </div>
-            <div class="search-hint-field">
-                <span class="search-hint-icon">&#128197;</span>
-                <span class="search-hint-label">Date</span>
-                <div class="search-hint-input">May 4, 2026</div>
-            </div>
-            <div class="search-hint-actions">
-                <button class="btn btn-primary">Search Bus</button>
-            </div>
-        </div>
-    </section>
-
     <section class="trust-section">
         <div class="container trust-grid">
             <div class="trust-card"><div class="trust-icon">&#128652;</div><strong>10,000+ Happy Travelers</strong><span>Trusted by frequent riders</span></div>
