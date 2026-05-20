@@ -29,6 +29,7 @@
             <li><a href="${pageContext.request.contextPath}/admin/bus-list" class="nav-link">Buses</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/route-list" class="nav-link">Routes</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/schedule-list" class="nav-link">Schedules</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/driver-list" class="nav-link">Drivers</a></li>
             <li><a href="${pageContext.request.contextPath}/logout" class="nav-link">Logout</a></li>
         </ul>
     </div>
@@ -151,10 +152,8 @@
                 <a href="${pageContext.request.contextPath}/admin/bus-list"   class="btn btn-secondary">View Buses</a>
                 <a href="${pageContext.request.contextPath}/admin/add-route"  class="btn btn-primary">Add Route</a>
                 <a href="${pageContext.request.contextPath}/admin/route-list" class="btn btn-secondary">View Routes</a>
-                <%-- "Manage Users" is a <span>, not an <a>, because user management is not yet
-                     implemented in Milestone 1. The span keeps the layout consistent without
-                     linking to a page that doesn't exist yet. --%>
-                <span class="btn btn-secondary nav-link-placeholder">Manage Users</span>
+                <a href="${pageContext.request.contextPath}/admin/driver-list" class="btn btn-secondary">View Drivers</a>
+                <a href="${pageContext.request.contextPath}/admin/add-driver" class="btn btn-primary">Add Driver</a>
             </div>
         </div>
 

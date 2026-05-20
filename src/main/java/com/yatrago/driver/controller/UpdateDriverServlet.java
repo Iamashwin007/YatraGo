@@ -1,5 +1,6 @@
 package com.yatrago.driver.controller;
 
+import com.yatrago.bus.dao.BusDAO;
 import com.yatrago.driver.dao.DriverDAO;
 import com.yatrago.driver.model.DriverModel;
 import com.yatrago.utils.FlashUtil;
@@ -40,6 +41,8 @@ public class UpdateDriverServlet extends HttpServlet {
         }
 
         req.setAttribute("driver", driver);
+        BusDAO busDAO = new BusDAO();
+        req.setAttribute("buses", busDAO.getAllBuses());
         req.getRequestDispatcher("/WEB-INF/admin/drivers/update-driver.jsp").forward(req, resp);
     }
 

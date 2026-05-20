@@ -24,6 +24,7 @@
             <li><a href="${pageContext.request.contextPath}/admin/bus-list"      class="nav-link">Buses</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/route-list"    class="nav-link">Routes</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/schedule-list" class="nav-link active">Schedules</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/driver-list" class="nav-link">Drivers</a></li>
             <li><a href="${pageContext.request.contextPath}/logout"              class="nav-link">Logout</a></li>
         </ul>
     </div>

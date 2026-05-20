@@ -83,9 +83,13 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label" for="busId">Assigned Bus ID (optional)</label>
-                        <input class="form-control" type="number" id="busId" name="busId"
-                               min="1" placeholder="Leave blank if not assigned">
+                        <label class="form-label" for="busId">Assigned Bus (optional)</label>
+                        <select class="form-control" id="busId" name="busId">
+                            <option value="">-- Not Assigned --</option>
+                            <c:forEach var="bus" items="${buses}">
+                                <option value="${bus.id}">${bus.busNumber} – ${bus.operatorName}</option>
+                            </c:forEach>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="status">Status *</label>

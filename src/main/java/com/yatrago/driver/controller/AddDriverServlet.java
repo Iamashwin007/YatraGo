@@ -1,5 +1,6 @@
 package com.yatrago.driver.controller;
 
+import com.yatrago.bus.dao.BusDAO;
 import com.yatrago.driver.dao.DriverDAO;
 import com.yatrago.driver.model.DriverModel;
 import com.yatrago.utils.FlashUtil;
@@ -17,6 +18,8 @@ public class AddDriverServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        BusDAO busDAO = new BusDAO();
+        req.setAttribute("buses", busDAO.getAllBuses());
         req.getRequestDispatcher("/WEB-INF/admin/drivers/add-driver.jsp").forward(req, resp);
     }
 
