@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
         FlashUtil.setMessage(req, "success", "Welcome back, " + user.getName() + ".");
 
         if ("admin".equals(user.getRole())) {
-            resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+            resp.sendRedirect(req.getContextPath() + "/");
         } else {
             resp.sendRedirect(req.getContextPath() + "/");
         }
