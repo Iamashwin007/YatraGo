@@ -124,6 +124,7 @@ button, input, select, textarea { font: inherit; }
     color: var(--clr-primary);
     background: var(--clr-primary-soft);
     font-weight: 600;
+    border-bottom: 2px solid var(--clr-primary);
 }
 .nav-link-cta {
     background: var(--clr-accent);
