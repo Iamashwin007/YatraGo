@@ -1405,6 +1405,21 @@ textarea.form-input { height: auto; padding: 0.75rem 1rem; }
 .team-card {
     text-align: center;
 }
+.team-card {
+    min-height: 245px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.team-card h4 {
+    min-height: 2.7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.team-card p {
+    margin-top: auto;
+}
 .icon-circle,
 .avatar,
 .icon-dot {
@@ -1427,6 +1442,25 @@ textarea.form-input { height: auto; padding: 0.75rem 1rem; }
 .avatar {
     color: #fff;
     background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
+}
+.team-card .avatar,
+.team-photo {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 1rem;
+    border-radius: 8px;
+}
+.team-card .avatar {
+    font-size: 2rem;
+}
+.team-photo {
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid #fff;
+    box-shadow: 0 10px 22px rgba(31, 41, 55, 0.14);
+    background: var(--clr-primary-soft);
 }
 .info-list {
     display: flex;
