@@ -13,21 +13,7 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="container">
-        <a href="${pageContext.request.contextPath}/" class="navbar-brand">
-            Yatra<span>Go</span>
-        </a>
-        <button class="hamburger" id="navToggle" aria-label="Toggle menu">&#9776;</button>
-        <ul class="navbar-nav" id="mainNav">
-            <li><a href="${pageContext.request.contextPath}/" class="nav-link">Home</a></li>
-            <li><a href="${pageContext.request.contextPath}/pages/about" class="nav-link">About</a></li>
-            <li><a href="${pageContext.request.contextPath}/pages/contact" class="nav-link">Contact</a></li>
-            <li><a href="${pageContext.request.contextPath}/login" class="nav-link">Login</a></li>
-            <li><a href="${pageContext.request.contextPath}/register" class="nav-link nav-link-cta">Register</a></li>
-        </ul>
-    </div>
-</nav>
+<%@ include file="/WEB-INF/includes/navbar.jsp" %>
 
 <main>
     <section class="hero">
@@ -174,24 +160,6 @@
     </div>
     <div class="footer-bottom">&copy; 2026 YatraGo. Built for Nepal.</div>
 </footer>
-
-<script>
-    (function () {
-        var nav    = document.querySelector('.navbar');
-        var toggle = document.getElementById('navToggle');
-        var menu   = document.getElementById('mainNav');
-        if (nav) {
-            window.addEventListener('scroll', function () {
-                nav.classList.toggle('scrolled', window.scrollY > 8);
-            }, { passive: true });
-        }
-        if (toggle && menu) {
-            toggle.addEventListener('click', function () {
-                menu.classList.toggle('nav-open');
-            });
-        }
-    }());
-</script>
 
 <c:if test="${not empty sessionScope.flashMessage}">
     <div id="flash-data" data-type="${sessionScope.flashType}" data-message="${sessionScope.flashMessage}" style="display:none;"></div>
