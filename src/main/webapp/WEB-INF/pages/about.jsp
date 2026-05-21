@@ -60,12 +60,12 @@
         <div class="container">
             <h2 class="section-title">Meet Our Team</h2>
             <div class="team-grid">
-                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Anuska.jpeg" alt="Anuska Magar"><h4>Anuska Magar</h4><p>Authentication &amp; Security Developer</p></article>
+                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Anuska.jpeg" alt="Anuska Magar"><h4>Anuska Magar</h4><p>CSS Styling &amp; Driver Management Developer</p></article>
                 <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Ashwin.png" alt="Ashwin Pokhrel"><h4>Ashwin Pokhrel</h4><p>Team Lead &amp; Frontend Developer</p></article>
-                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Ashutosh.jpeg" alt="Ashutosh Janga Thapa"><h4>Ashutosh Janga Thapa</h4><p>Schedule &amp; Booking Backend Developer</p></article>
-                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Hritika.jpeg" alt="Hritika Biswakarma"><h4>Hritika Biswakarma</h4><p>Admin Dashboard &amp; Bus Management</p></article>
-                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Jonrika.jpeg" alt="Jonrika Karki"><h4>Jonrika Karki</h4><p>Database &amp; Route Management</p></article>
-                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Nisha.jpeg" alt="Nisha Rai"><h4>Nisha Rai</h4><p>User/Driver Models &amp; Analytics</p></article>
+                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Ashutosh.jpeg" alt="Ashutosh Janga Thapa"><h4>Ashutosh Janga Thapa</h4><p>Booking Backend &amp; Emergency Alerts Developer</p></article>
+                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Hritika.jpeg" alt="Hritika Biswakarma"><h4>Hritika Biswakarma</h4><p>JSP Templates &amp; Navigation Developer</p></article>
+                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Jonrika.jpeg" alt="Jonrika Karki"><h4>Jonrika Karki</h4><p>Database &amp; Schema Management Developer</p></article>
+                <article class="team-card"><img class="team-photo" src="<%= request.getContextPath() %>/images/Nisha.jpeg" alt="Nisha Rai"><h4>Nisha Rai</h4><p>Validation, Error Handling &amp; Support Developer</p></article>
             </div>
         </div>
     </section>
