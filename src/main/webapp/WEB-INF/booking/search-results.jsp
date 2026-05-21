@@ -259,8 +259,15 @@
                                     </div>
                                     <div class="result-fare-label">per seat</div>
                                 </div>
-                                <a href="${pageContext.request.contextPath}/seat-select?scheduleId=${schedule.id}"
-                                   class="btn btn-primary">Book Now</a>
+                                <c:choose>
+                                    <c:when test="${schedule.availableSeats == 0}">
+                                        <button type="button" class="btn btn-primary" disabled>Fully Booked</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="${pageContext.request.contextPath}/seat-select?scheduleId=${schedule.id}"
+                                           class="btn btn-primary">Book Now</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </c:forEach>
